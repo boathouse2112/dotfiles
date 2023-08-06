@@ -27,7 +27,6 @@
 (setq use-package-always-ensure t)
 
 ;; Install packages
-
 (use-package diminish) ; Enable :diminish to remove pkg from modeline
 (use-package ivy ; Completion
 	:diminish
@@ -40,6 +39,19 @@
 	:init (doom-modeline-mode 1))
 (use-package all-the-icons) ; Modeline icons
 
+;; General
+
+;; Paren settings
+(setq blink-matching-delay 0)
+
+; Scroll settings
+(setq scroll-margin 5
+      scroll-conservatively 101
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01
+      scroll-preserve-screen-position t
+      auto-window-vscroll nil)
+
 ;; Evil keybindings
 (use-package evil
 	:init
@@ -47,11 +59,20 @@
 	(setq evil-want-integration t)
 	(setq evil-want-keybinding nil)
 	:config
-	(evil-mode 1))
+	(evil-mode 1)
+	)
 
 (use-package evil-collection
   :config
   (evil-collection-init)) ; Evil keybindings for other modes
+
+;; Hydra -- Helix-like popup palettes
+;(use-package hydra)
+
+;(defhydra hydra-goto (global-map "<f2>")
+;  "goto"
+;  ("g" evil-goto-first-line "Goto file start"))
+  
 
 
 ;; Keybindings
@@ -65,16 +86,3 @@
 
 ;; Auto-generated garbage
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(evil-collection ivy use-package)))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
