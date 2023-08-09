@@ -107,7 +107,11 @@
       "s-l" #'comint-clear-buffer)
 
 
-;; ==== LANGUAGE CONFIG ===
+;; ==== MAJOR MODE CONFIG ===
+
+;; == Dired ==
+; FIXME Doesn't work?
+(remove-hook 'dired-mode-hook 'dired-omit-mode)
 
 ;; == Ruby ==
 ; Get robocop autocorrect to work correctly
@@ -118,9 +122,3 @@
 ; Use robe functions for lookup handlers
 (set-lookup-handlers! 'ruby-mode
   :definition #'robe-jump)
-;; ; Add Robe keybindings
-;; (map! :after ruby-mode
-;;       :map ruby-mode-map
-;;       :desc "robe-jump"
-;;       :when '(eq major-mode 'ruby-mode)
-;;       :nv "g d" #'robe-jump)
