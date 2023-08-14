@@ -40,10 +40,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -95,6 +91,10 @@
       '(("~/Projects" . 1)))
 
 ;; == Org mode ==
+; Default directory
+(setq org-directory "~/Notes/")
+; Default notes file
+(setq org-default-notes-file (concat org-directory "notes.org"))
 ; Set code folding keybinds. Also works in doom-docs-mode
 (map! :after evil-org
       :mode evil-org-mode
@@ -112,6 +112,22 @@
       :n "z O" #'org-fold-show-all
       :n "z c" #'org-fold-hide-subtree
       :n "z C" #'org-fold-hide-sublevels)
+; Disable autocomplete
+(add-hook 'org-mode-hook (lambda () (company-mode -1)))
+
+;; = Org Chef =
+(after! org
+  (setq org-capture-templates
+      (append org-capture-templates
+              '(("c" "Cookbook" entry (file "~/Notes/cookbook.org")
+                 "%(org-chef-get-recipe-from-url)"
+                 :empty-lines 1)
+                ("m" "Manual Cookbook" entry (file "~/Notes/cookbook.org")
+                 "* %^{Recipe title: }\n\
+                  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n\
+                  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n")))))
+
+
 
 ;; == Workspaces ==
 ; Have emacsclient open in the main workspace instead of a new one

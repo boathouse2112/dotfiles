@@ -50,3 +50,4 @@
 ;(unpin! t)
 
 (package! monokai-pro-theme)
+(package! org-chef)
