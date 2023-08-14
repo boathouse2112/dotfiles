@@ -84,7 +84,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; == Evil Mode ==
-(map! :nv "C-j" #'evil-scroll-line-down
+(map! :n "U" #'evil-redo
+      :nv "C-j" #'evil-scroll-line-down
       :nv "C-k" #'evil-scroll-line-up)
 
 ;; == Projectile ==
@@ -93,8 +94,27 @@
       ; ("dir" . 1) finds projects "dir/proj1", "dir/proj2", ...
       '(("~/Projects" . 1)))
 
+;; == Org mode ==
+; Set code folding keybinds. Also works in doom-docs-mode
+(map! :after evil-org
+      :mode evil-org-mode
+      :n "s-j" #'org-forward-element ; Navigation
+      :n "s-k" #'org-backward-element
+      :n "s-h" #'org-up-element
+      :n "s-l" #'org-down-element
+      :n "s-K" #'org-metaup
+      :n "s-J" #'org-metadown
+      :n "s-K" #'org-metaup
+      :n "C-s-j" #'org-shiftmetadown
+      :n "C-s-k" #'org-shiftmetaup
+
+      :n "z o" #'org-fold-show-subtree ; Code folding
+      :n "z O" #'org-fold-show-all
+      :n "z c" #'org-fold-hide-subtree
+      :n "z C" #'org-fold-hide-sublevels)
+
 ;; == Workspaces ==
-; Have
+; Have emacsclient open in the main workspace instead of a new one
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
