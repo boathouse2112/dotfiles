@@ -112,8 +112,7 @@
       :n "z O" #'org-fold-show-all
       :n "z c" #'org-fold-hide-subtree
       :n "z C" #'org-fold-hide-sublevels)
-; Disable autocomplete
-(add-hook 'org-mode-hook (lambda () (company-mode -1)))
+; Disable 
 
 ;; = Org Chef =
 (after! org
@@ -134,6 +133,13 @@
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
+;; == Eshell ==
+; Set command-backspace to delete to shell line start
+(map! :after eshell
+      ;; :map (eshell-mode-map eshell-command-map)
+      :mode eshell-mode
+      :i "s-<backspace>" #'eshell-kill-input)
+
 ;; == Comint (repl modes) ==
 ; Set the normal terminal keybinds to work in repl modes
 (map! :after comint-mode-hook
@@ -150,10 +156,9 @@
 (remove-hook 'dired-mode-hook 'dired-omit-mode)
 
 ;; == Ruby ==
-; Get robocop autocorrect to work correctly
-; NOTE: It has to be (after! ruby-mode), but idk why (after! rubocop-mode) doesn't work
+
 (after! ruby-mode
-  (setq rubocop-autocorrect-command "rubocop -A --format emacs"))
+  (setq ruby-indent-level 4))
 
 ; Use robe functions for lookup handlers
 (set-lookup-handlers! 'ruby-mode
