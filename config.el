@@ -90,6 +90,11 @@
       ; ("dir" . 1) finds projects "dir/proj1", "dir/proj2", ...
       '(("~/Projects" . 1)))
 
+;; == Company ==
+; Disable company in org mode
+(after! company
+  (setq company-global-modes '(not org-mode)))
+
 ;; == Org mode ==
 ; Default directory
 (setq org-directory "~/Notes/")
@@ -105,6 +110,8 @@
       :n "s-K" #'org-metaup
       :n "s-J" #'org-metadown
       :n "s-K" #'org-metaup
+      :n "s-H" #'org-do-promote
+      :n "s-L" #'org-do-demote
       :n "C-s-j" #'org-shiftmetadown
       :n "C-s-k" #'org-shiftmetaup
 
@@ -112,7 +119,6 @@
       :n "z O" #'org-fold-show-all
       :n "z c" #'org-fold-hide-subtree
       :n "z C" #'org-fold-hide-sublevels)
-; Disable 
 
 ;; = Org Chef =
 (after! org
@@ -158,7 +164,7 @@
 ;; == Ruby ==
 
 (after! ruby-mode
-  (setq ruby-indent-level 4))
+  (setq ruby-indent-level 2))
 
 ; Use robe functions for lookup handlers
 (set-lookup-handlers! 'ruby-mode
