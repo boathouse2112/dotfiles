@@ -94,6 +94,9 @@
 ; Disable company in org mode
 (after! company
   (setq company-global-modes '(not org-mode)))
+(map! :after company
+      :map company-active-map
+      "<tab>" #'company-complete-selection)
 
 ;; == Org mode ==
 ; Default directory
