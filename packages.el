@@ -51,3 +51,4 @@
 
 (package! monokai-pro-theme)
 (package! org-chef)
+(package! good-scroll)

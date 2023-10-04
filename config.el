@@ -78,6 +78,7 @@
 ;; == Startup ==
 ; Start emacs in fullscreen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(good-scroll-mode 1)
 
 ;; == Evil Mode ==
 (map! :n "U" #'evil-redo
@@ -116,24 +117,24 @@
       :n "s-H" #'org-do-promote
       :n "s-L" #'org-do-demote
       :n "C-s-j" #'org-shiftmetadown
-      :n "C-s-k" #'org-shiftmetaup
+      :n "C-s-k" #'org-shiftmetaup)
 
-      :n "z o" #'org-fold-show-subtree ; Code folding
-      :n "z O" #'org-fold-show-all
-      :n "z c" #'org-fold-hide-subtree
-      :n "z C" #'org-fold-hide-sublevels)
+      ;; :n "z o" #'org-fold-show-subtree ; Code folding
+      ;; :n "z O" #'org-fold-show-all
+      ;; :n "z c" #'org-fold-hide-subtree
+      ;; :n "z C" #'org-fold-hide-sublevels)
 
 ;; = Org Chef =
-(after! org
-  (setq org-capture-templates
-      (append org-capture-templates
-              '(("c" "Cookbook" entry (file "~/Notes/cookbook.org")
-                 "%(org-chef-get-recipe-from-url)"
-                 :empty-lines 1)
-                ("m" "Manual Cookbook" entry (file "~/Notes/cookbook.org")
-                 "* %^{Recipe title: }\n\
-                  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n\
-                  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n")))))
+;; (after! org
+;;   (setq org-capture-templates
+;;       (append org-capture-templates
+;;               '(("c" "Cookbook" entry (file "~/Notes/cookbook.org")
+;;                  "%(org-chef-get-recipe-from-url)"
+;;                  :empty-lines 1)
+;;                 ("m" "Manual Cookbook" entry (file "~/Notes/cookbook.org")
+;;                  "* %^{Recipe title: }\n\
+;;                   :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n\
+;;                   :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n")))))
 
 
 
@@ -144,31 +145,31 @@
 
 ;; == Eshell ==
 ; Set command-backspace to delete to shell line start
-(map! :after eshell
-      ;; :map (eshell-mode-map eshell-command-map)
-      :mode eshell-mode
-      :i "s-<backspace>" #'eshell-kill-input)
+;; (map! :after eshell
+;;       ;; :map (eshell-mode-map eshell-command-map)
+;;       :mode eshell-mode
+;;       :i "s-<backspace>" #'eshell-kill-input)
 
 ;; == Comint (repl modes) ==
-; Set the normal terminal keybinds to work in repl modes
-(map! :after comint-mode-hook
-      :map comint-mode-map
-      "C-d" #'comint-send-eof ; FIXME overridden
-      "C-c" #'comint-interrupt-subjob ; FIXME overridden
-      "s-l" #'comint-clear-buffer)
+;; ; Set the normal terminal keybinds to work in repl modes
+;; (map! :after comint-mode-hook
+;;       :map comint-mode-map
+;;       "C-d" #'comint-send-eof ; FIXME overridden
+;;       "C-c" #'comint-interrupt-subjob ; FIXME overridden
+;;       "s-l" #'comint-clear-buffer)
 
 
 ;; ==== MAJOR MODE CONFIG ===
 
-;; == Dired ==
-; FIXME Doesn't work?
-(remove-hook 'dired-mode-hook 'dired-omit-mode)
+;; ;; == Dired ==
+;; ; FIXME Doesn't work?
+;; (remove-hook 'dired-mode-hook 'dired-omit-mode)
 
-;; == Ruby ==
+;; ;; == Ruby ==
 
-(after! ruby-mode
-  (setq ruby-indent-level 2))
+;; (after! ruby-mode
+;;   (setq ruby-indent-level 2))
 
-; Use robe functions for lookup handlers
-(set-lookup-handlers! 'ruby-mode
-  :definition #'robe-jump)
+;; ; Use robe functions for lookup handlers
+;; (set-lookup-handlers! 'ruby-mode
+;;   :definition #'robe-jump)
